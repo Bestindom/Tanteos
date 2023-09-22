@@ -1,0 +1,74 @@
+* {
+    /*The padding and border are included within the specified width and height*/
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    font-family: system-ui;
+    min-block-size: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+.card {
+    color: white;
+    text-align: center;
+    max-width: 25ch;
+    background-color: aqua;
+    padding: 1.5rem 2.5rem;
+    background-image: url(https://i.pinimg.com/564x/7b/b8/e6/7bb8e65c8f07e794beae57c1b2b1f315.jpg);
+    background-size: 105% 105%;
+    background-position: center top;
+    transition: background-position 350ms;
+    /*everything outside the card will be hidden*/
+    overflow: hidden;
+}
+
+.card:hover,
+.card.focus-whithin {
+    background-position: center bottom;
+}
+
+.card-content {
+    display: grid;
+    gap: 1rem;
+
+    transform: translateY(calc(100% - 2rem));
+    transition: transform 550ms;
+}
+
+.card:hover .card-content,
+.card:focus-within .card-content {
+    transform: translateY(0);
+}
+
+.card-content > p {
+    font-family: serif;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-style: italic;
+    /* here it's like ivisible  */
+    opacity: 0;
+    transition: opacity 550ms;
+}
+
+.card:hover p,
+.card:focus-within p {
+    opacity: 1;
+}
+
+.button {
+    background: black;
+    color: white;
+    padding: 0.5rem 1rem 0.625rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.825rem;
+    font-weight: 500;
+}
+
+.button:hover,
+.button.focus {
+    background: #333;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card">
+        <h1>Tips Calulator</h1>
+        <div class="input-box">
+            <input type="number" id="people" placeholder="Number of people">
+            <input type="number" id="totalBill" placeholder="Total bill">
+        </div>
+        <label for="multiplier">How has the attention been:</label>
+        <select id="multiplier">
+            <option value="">Select</option>
+            <option value="0">Terrible</option>
+            <option value="0.05">Acceptable</option>
+            <option value="0.10">Awesome</option>
+        </select>
+        <button class="button" id="calculate" onclick="validateForm()">
+          Calculate
+        </button>
+        <br>
+        <br>
+        <p id="error"></p>
+        <p id="answer"></p>
+
+    </div>
+    <script src="index.js">
+    </script>
+</body>
+</html>

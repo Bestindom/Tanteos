@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding: 5px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+
+  h1 {
+    color: blue;
+    display: flex;
+    justify-content: center;
+    background-color: aqua;
+    border: 2px solid black;
+    border-radius: 25px;
+  }
+
+  #answer {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  #error {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: red;
+    font-size: 20px;
+  }

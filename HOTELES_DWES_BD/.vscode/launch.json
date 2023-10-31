@@ -9,7 +9,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:8080/php_basico/HOTELES_DWES_BD/menu.php",
+            "url": "http://localhost/php/HOTELES_DWES_BD/menu.php",
             "webRoot": "${workspaceFolder}"
         },
         {

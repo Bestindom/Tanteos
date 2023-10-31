@@ -13,7 +13,23 @@
 
     <div class="container">
 
-        <?php require_once ('./php_partials/message.php') ?>
+        <?php
+            require_once ('./php_partials/message.php');
+            
+            if (isset($_SESSION['city']))
+            {
+                $city = $_SESSION['city'];
+                unset($_SESSION['city']);
+            }
+            else
+            {
+                $city = [
+                    'id_city' => '',
+                    'name' => ''
+                ];
+            }
+        
+        ?>
 
 
         <div class="card mt-2">
@@ -26,7 +42,8 @@
                     <div class="form-group row p-2">
                         <label for="id_city" class="col-sm 2 col-form-label">Identificator</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id_city" name="id_city" placeholder="City Identificator">
+                            <input type="text" class="form-control" id="id_city" name="id_city" placeholder="City Identificator"
+                            value="<?php echo $city['id_city']?>">
                         </div>
                     </div>
 
@@ -34,7 +51,8 @@
                     <div class="form-group row p-2">
                         <label for="name" class="col-sm 2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="City Name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="City Name"
+                            value="<?php echo $city['name']?>">
                         </div>
                     </div>
 

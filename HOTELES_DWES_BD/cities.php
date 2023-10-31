@@ -18,6 +18,8 @@
     <?php include_once ('./menu.php') ?>
 
     <div class="container">
+        <?php require_once ('./php_partials/message.php') ?>
+
         <div class="float-right">
             <a href="./city.php" class="btn btn-primary">New City</a>
         </div>

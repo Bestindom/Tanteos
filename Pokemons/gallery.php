@@ -1,3 +1,9 @@
+<?php
+    require_once('./php_librarys/db.php');
+
+    $cities = selectPokemons();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,51 +17,17 @@
     <?php include_once ('./menu.php') ?>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-    <div class="col">
-        <div class="card h-100">
-        <img src="./images/001.png" class="card-img-top" alt="dead pokemon">
-        <div class="card-body">
-            <h5 class="card-title">Bulbasaur</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-        <img src="./images/002.png" class="card-img-top" alt="dead pokemon">
-        <div class="card-body">
-            <h5 class="card-title">Ivysaur</h5>
-            <p class="card-text">This is a short card.</p>
-        </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-        <img src="./images/003.png" class="card-img-top" alt="dead pokemon">
-        <div class="card-body">
-            <h5 class="card-title">Venusaur</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-        <img src="./images/004.png" class="card-img-top" alt="dead pokemon">
-        <div class="card-body">
-            <h5 class="card-title">Charmander</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-        <img src="./images/005.png" class="card-img-top" alt="dead pokemon">
-        <div class="card-body">
-            <h5 class="card-title">Charmeleon</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        </div>
-    </div>
+        <?php foreach ($cities as $city) { ?>
+            <div class="col">
+                <div class="card h-100">
+                <img src="<?php echo $city['image']; ?>" class="card-img-top" alt="dead pokemon">
+                    <div class="card-body in-line">
+                        <h5 class="card-title"><?php echo $city['name']; ?></h5>
+                        <h5 class="card-title"><?php echo $city['type']; ?></h5>
+                    </div>
+                </div>
+            </div>     
+        <?php } ?>
     </div>
 
 

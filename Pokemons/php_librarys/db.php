@@ -25,7 +25,7 @@ function selectPokemons() {
 
     $connection = openDb();
 
-    $statementTxt = "select * from pokemons";
+    $statementTxt = "select * from pokemon";
 
     $statement = $connection->prepare($statementTxt);
     $statement->execute();

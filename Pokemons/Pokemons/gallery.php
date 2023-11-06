@@ -1,7 +1,7 @@
 <?php
     require_once('./php_librarys/db.php');
 
-    $pokemons = selectPokemons();
+    $cities = selectPokemons();
 ?>
 
 <!DOCTYPE html>
@@ -17,21 +17,13 @@
     <?php include_once ('./menu.php') ?>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-        <?php foreach ($pokemons as $pokemon) { ?>
+        <?php foreach ($cities as $city) { ?>
             <div class="col">
                 <div class="card h-100">
-                <img src="<?php echo $pokemon['image']; ?>" class="card-img-top" alt="dead pokemon">
+                <img src="<?php echo $city['image']; ?>" class="card-img-top" alt="dead pokemon">
                     <div class="card-body in-line">
-                        <h5 class="card-title"><?php echo $pokemon['name']; ?></h5>
-                        <h5 class="card-title"><?php echo $pokemon['type']; ?></h5>
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-outline-warning">
-                            <img src="./images/modificate.png" width="30" height="30" alt="modificate">
-                        </button>
-                        <button type="button" class="btn btn-outline-danger">
-                            <img src="./images/delete.png" width="30" height="36" alt="delete">
-                        </button>
+                        <h5 class="card-title"><?php echo $city['name']; ?></h5>
+                        <h5 class="card-title"><?php echo $city['type']; ?></h5>
                     </div>
                 </div>
             </div>     

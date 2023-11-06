@@ -2,50 +2,11 @@
 
 session_start();
 
-function errorMessage($e)
-    {
-        if (!empty($e->errorInfo[1]))
-        {
-            switch ($e->errorInfo[1])
-            {
-                case 1062:
-                    $message = 'Duplicated record';
-                    break;
-                case 1451:
-                    $message = 'Record with related elements';
-                    break;
-                default:
-                    $message = $e->errorInfo[1] . ' - ' . $e->errorInfo[2];
-                    break;
-            }
-        }
-        else
-        {
-            switch ($e->getCode())
-            {
-                case 1044:
-                    $message = "Incorrect user and/or password";
-                    break;
-                case 1049:
-                    $message = "Unknow database";
-                    break;
-                case 2002:
-                    $message = "Server not found";
-                    break;
-                default:
-                    $message = $e->getCode() . ' - ' . $e->getMessage();
-                    break;
-            }
-        }
-
-        return $message;
-    }
-
 function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -77,18 +38,17 @@ function selectPokemons() {
     return $result;
 }
 
-function insertPokemon($id_pokemon, $name, $type) {
+function insertPokemon($id_pokemon, $name) {
+
 
     try 
     {
         $connection = openDb();
 
-        $statementTxt = "insert into pokemon (id_pokemon, name) values (:id_pokemon, :name, :type)";
+        $statementTxt = "insert into ciudades (id_pokemon, name) values (:id_pokemon, :name)";
         $statement = $connection->prepare($statementTxt);
         $statement->bindParam(':id_pokemon', $id_pokemon);
         $statement->bindParam(':name', $name);
-        $statement->bindParam(':type', $type);
-        //$statement->bindParam(':image', $image);
         $statement->execute();
 
         $_SESSION['message'] = 'Record inserted succesfully';
@@ -97,12 +57,9 @@ function insertPokemon($id_pokemon, $name, $type) {
     catch (PDOException $e) 
     {
         $_SESSION['error'] = errorMessage($e);
-        $pokemon['id_pokemon'] = $id_pokemon;
-        $pokemon['name'] = $name;
-        $pokemon['type'] = $type;
-        //$pokemon['image'] = $image;
-        //I saved this varible session to hold data that user inserted
-        $_SESSION['pokemon'] = $pokemon;
+        $city['id_city'] = $id_pokemon;
+        $city['name'] = $name;
+        $_SESSION['city'] = $city;
     }
 
     $connection = closeDb();
@@ -127,7 +84,6 @@ function deletePokemon ($id_city) {
     {
         $_SESSION['error'] = errorMessage($e);
         $city['id_city'] = $id_city;
-        //I saved this varible session to hold data that user inserted
         $_SESSION['city'] = $city;
     }
 

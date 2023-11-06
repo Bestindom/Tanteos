@@ -13,17 +13,37 @@
 
     <div class="container">
 
+        <?php
+            require_once ('./php_partials/message.php');
+            
+            if (isset($_SESSION['pokemon']))
+            {
+                $pokemon = $_SESSION['pokemon'];
+                unset($_SESSION['pokemon']);
+            }
+            else
+            {
+                $pokemon = [
+                    'id_pokemon' => '',
+                    'name' => '',
+                    'type' => ''
+                ];
+            }
+        
+        ?>
+
         <div class="card mt-2">
             <div class="card-header bg-secondary text-white">
                 Pokemon
             </div>
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="./php_controllers/pokemonController.php" method="POST">
                     <!-- Pokemon Identificator -->
                     <div class="form-group row p-2">
                         <label for="id_pokemon" class="col-sm 2 col-form-label">Identificator</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id_pokemon" name="id_pokemon" placeholder="Pokemon #">
+                            <input type="text" class="form-control" id="id_pokemon" name="id_pokemon" placeholder="Pokemon #"
+                            value="<?php echo $pokemon['id_pokemon']?>">
                         </div>
                     </div>
 
@@ -31,7 +51,8 @@
                     <div class="form-group row p-2">
                         <label for="name" class="col-sm 2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Pokemon Name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Pokemon Name"
+                            value="<?php echo $pokemon['name']?>">
                         </div>
                     </div>
 
@@ -39,35 +60,40 @@
                     <div class="form-group row p-2">
                         <label for="type" class="col-sm 2 col-form-label">Type</label>
                         <div class="col-sm-10">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" name="type" aria-label="Default select example">
                                 <option selected>Pokemon Type</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Fire">Fire</option>
-                                <option value="Water">Water</option>
-                                <option value="Grass">Grass</option>
-                                <option value="Electric">Electric</option>
-                                <option value="Ice">Ice</option>
-                                <option value="Fighting">Fighting</option>
-                                <option value="Poison">Poison</option>
-                                <option value="Ground">Ground</option>
-                                <option value="Flying">Flying</option>
-                                <option value="Psychic">Psychic</option>
-                                <option value="Bug">Bug</option>
-                                <option value="Rock">Rock</option>
-                                <option value="Ghost">Ghost</option>
-                                <option value="Dragon">Dragon</option>
-                                <option value="Dark">Dark</option>
-                                <option value="Steel">Steel</option>
-                                <option value="Fairy">Fairy</option>
+                                <option value="<?php echo $pokemon['type']?>">Normal</option>
+                                <option value="<?php echo $pokemon['type']?>">Fire</option>
+                                <option value="<?php echo $pokemon['type']?>">Water</option>
+                                <option value="<?php echo $pokemon['type']?>">Grass</option>
+                                <option value="<?php echo $pokemon['type']?>">Electric</option>
+                                <option value="<?php echo $pokemon['type']?>">Ice</option>
+                                <option value="<?php echo $pokemon['type']?>">Fighting</option>
+                                <option value="<?php echo $pokemon['type']?>">Poison</option>
+                                <option value="<?php echo $pokemon['type']?>">Ground</option>
+                                <option value="<?php echo $pokemon['type']?>">Flying</option>
+                                <option value="<?php echo $pokemon['type']?>">Psychic</option>
+                                <option value="<?php echo $pokemon['type']?>">Bug</option>
+                                <option value="<?php echo $pokemon['type']?>">Rock</option>
+                                <option value="<?php echo $pokemon['type']?>">Ghost</option>
+                                <option value="<?php echo $pokemon['type']?>">Dragon</option>
+                                <option value="<?php echo $pokemon['type']?>">Dark</option>
+                                <option value="<?php echo $pokemon['type']?>">Steel</option>
+                                <option value="<?php echo $pokemon['type']?>">Fairy</option>
                             </select>
                         </div>
+                    </div>
+
+                    <!-- Pokemon Image -->
+                    <div>
+
                     </div>
 
                     <!-- Form buttons -->
                     <div class="p-2">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-primary" name="insert">Accept</button>
-                            <a href="./menu.php" class="btn btn-secondary">Cancel</a>
+                            <a href="./gallery.php" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
 

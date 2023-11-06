@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Document</title>
@@ -37,7 +38,7 @@
                 Pokemon
             </div>
             <div class="card-body">
-                <form action="./php_controllers/pokemonController.php" method="POST">
+                <form action="./php_controllers/pokemonController.php" method="POST" enctype="multipart/form-data">
                     <!-- Pokemon Identificator -->
                     <div class="form-group row p-2">
                         <label for="id_pokemon" class="col-sm 2 col-form-label">Identificator</label>
@@ -86,7 +87,13 @@
 
                     <!-- Pokemon Image -->
                     <div>
-
+                        <div class="form-group row p-2">
+                            <label for="image" class="col-sm 2 col-form-label">Image</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="image" name="image" placeholder="Pokemon Image"
+                                value="<?php echo $pokemon['image']?>">
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Form buttons -->

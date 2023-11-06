@@ -45,7 +45,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -77,18 +77,18 @@ function selectPokemons() {
     return $result;
 }
 
-function insertPokemon($id_pokemon, $name, $type) {
+function insertPokemon($id_pokemon, $name, $image) {
 
     try 
     {
         $connection = openDb();
 
-        $statementTxt = "insert into pokemon (id_pokemon, name) values (:id_pokemon, :name, :type)";
+        $statementTxt = "insert into pokemon (id_pokemon, name , image) values (:id_pokemon, :name, :image)";
         $statement = $connection->prepare($statementTxt);
         $statement->bindParam(':id_pokemon', $id_pokemon);
         $statement->bindParam(':name', $name);
-        $statement->bindParam(':type', $type);
-        //$statement->bindParam(':image', $image);
+        //$statement->bindParam(':type', $type);
+        $statement->bindParam(':image', $image);
         $statement->execute();
 
         $_SESSION['message'] = 'Record inserted succesfully';
@@ -99,8 +99,8 @@ function insertPokemon($id_pokemon, $name, $type) {
         $_SESSION['error'] = errorMessage($e);
         $pokemon['id_pokemon'] = $id_pokemon;
         $pokemon['name'] = $name;
-        $pokemon['type'] = $type;
-        //$pokemon['image'] = $image;
+        // $pokemon['type'] = $type;
+        $pokemon['image'] = $image;
         //I saved this varible session to hold data that user inserted
         $_SESSION['pokemon'] = $pokemon;
     }
@@ -108,16 +108,15 @@ function insertPokemon($id_pokemon, $name, $type) {
     $connection = closeDb();
 }
 
-function deletePokemon ($id_city) {
-
+function deletePokemon ($id_pokemon) {
 
     try 
     {
         $connection = openDb();
 
-        $statementTxt = "delete from ciudades where (id_ciudad = :id_city)";
+        $statementTxt = "delete from pokemon where (id_pokemon = :id_pokemon)";
         $statement = $connection->prepare($statementTxt);
-        $statement->bindParam(':id_city', $id_city);
+        $statement->bindParam(':id_pokemon', $id_pokemon);
         $statement->execute();
 
         $_SESSION['message'] = 'Delete succesfully';
@@ -126,9 +125,9 @@ function deletePokemon ($id_city) {
     catch (PDOException $e) 
     {
         $_SESSION['error'] = errorMessage($e);
-        $city['id_city'] = $id_city;
+        $pokemon['id_pokemon'] = $id_pokemon;
         //I saved this varible session to hold data that user inserted
-        $_SESSION['city'] = $city;
+        $_SESSION['pokemon'] = $pokemon;
     }
 
     $connection = closeDb();

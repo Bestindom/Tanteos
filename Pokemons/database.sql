@@ -1,4 +1,4 @@
-drop database if exists `pokemons`;
+DROP DATABASE IF EXISTS `pokemons`;
 CREATE DATABASE  IF NOT EXISTS `pokemons`;
 USE `pokemons`;
 
@@ -8,14 +8,14 @@ CREATE TABLE `types` (
   PRIMARY KEY (`type`)
 );
 
-
 DROP TABLE IF EXISTS `pokemon`;
 CREATE TABLE `pokemon` (
   `id_pokemon` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `image` varchar(255),
-  PRIMARY KEY (`id_pokemon`)
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_pokemon`),
+  FOREIGN KEY (`type`) REFERENCES `types` (`type`)
 );
 
 INSERT INTO `types` values
@@ -38,10 +38,7 @@ INSERT INTO `types` values
 ('Steel'),
 ('Fairy');
 
-
 INSERT INTO `pokemon` values
-(001, 'Bulbasaur' , 'Grass', './images/001.png'),
-(002, 'Ivysaur' , 'Grass', './images/002.png'),
-(003, 'Venusaur' , 'Grass', './images/003.png'),
-(004, 'Charmander' , 'Fire', './images/004.png'),
-(005, 'Charmeleon' , 'Fire', './images/005.png');
+(001, 'Bulbasaur', 'Grass', './images/001.png'),
+(002, 'Ivysaur', 'Grass', './images/002.png'),
+(003, 'Venusaur' , 'Grass', './images/003.png');

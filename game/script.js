@@ -1,13 +1,65 @@
-let level1 = [
-    [1,1,0,0,1],
-    [0,1,1,0,1],
-    [1,1,1,1,1],
-    [1,0,1,0,0],
-    [1,0,1,1,1]
-];
-// Hector TIP escalabilidad --> array con las posiciones que no puede pasar
 
-let mazeArray = level1;
+level1 = [
+    [1,1,1,0,1,1,1,0,1,1,1,1,1],
+    [0,0,1,1,1,0,0,0,1,0,0,0,1],
+    [1,1,1,0,1,1,1,0,1,0,1,1,1],
+    [1,0,1,0,1,0,1,1,1,0,1,0,0],
+    [1,0,1,0,1,0,1,0,1,0,1,1,1],
+    [1,1,1,0,1,0,1,1,1,0,0,0,1],
+    [1,0,0,0,1,0,1,0,1,1,1,0,1]
+];
+
+
+level2 = [
+    [1,1,1,0,1,1,1,0,1,1],
+    [0,0,1,1,0,1,0,0,0,1],
+    [1,1,1,0,1,1,1,0,1,0],
+    [1,0,1,0,0,1,0,1,1,1],
+    [1,1,1,0,0,1,1,1,0,0],
+    [1,1,1,0,1,1,1,0,0,0],
+    [1,0,0,0,1,0,1,0,1,1]
+];
+
+
+
+level3 = [
+    [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
+    [0,0,1,1,0,1,0,0,0,1,1,0,1,1,1,0,1,1],
+    [1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],
+    [1,0,1,0,0,1,0,1,1,1,1,0,1,1,1,0,1,1],
+    [1,1,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1],
+    [1,1,1,0,1,1,1,0,0,0,1,0,1,1,1,0,1,1],
+    [1,0,0,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1]
+];
+
+// Hector TIP escalabilidad --> array con las posiciones que no puede pasar
+let chooseLevel = document.getElementById("levelSelect");
+let mazeArray;
+
+chooseLevel.addEventListener("change",
+function()
+{
+    let level = chooseLevel.value;
+    console.log(level);
+
+    switch (level) {
+        case 1:
+            mazeArray = level1;
+            break;
+        case 2:
+            mazeArray = level2;
+            break;
+        case 3:
+            mazeArray = level3;
+            break;
+        default:
+            mazeArray = level1;
+            break;
+    }
+
+    createMaze();
+});
+    
 let maze = document.getElementById("maze-container");
 let warrior= document.getElementById("warrior");
 function setWarriorPosition (x,y) {
@@ -61,6 +113,17 @@ function getWarriorPosition() {
     }
     // console.log("warrior position is " + position);
     return position;
+}
+
+function win(warriorPosition)
+{
+    warriorPosition = getWarriorPosition();
+    console.log(warriorPosition);
+    console.log(mazeArray.length);
+    if (warriorPosition[0] == (mazeArray.length - 1) && warriorPosition[1] == (mazeArray.length - 1))
+    {
+        alert("You win You win You win You win You win You win You win You win You win You win You win You win You win You win");
+    }
 }
 
 
@@ -127,6 +190,7 @@ document.addEventListener("keydown",
                 }
             }
         }
+        win(warriorPosition);
         console.log(mazeArray);
     }
 
@@ -159,4 +223,11 @@ document.addEventListener("keydown",
     // [0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     // [0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     // [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+       // if warrior arrive here, win!
+    //    if (warriorPosition == 2 && mazeArray == 2)
+    //    {
+    //        alert
+    //    }
+    //    console.log(mazeArray);
 );

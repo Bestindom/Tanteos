@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     justify-content: center;
     height: 45vw;
+    background-image: url(./img/landscape.png);
 }
 
 #maze-container {
@@ -17,6 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .row {
@@ -34,8 +36,27 @@ body {
     border: 1px solid black;
 }
 
-#warrior{
+#warrior {
     position: absolute;
     top: 0px;
     left: 0px;
+    /* background: radial-gradient(circle at 20px 20px, blue 0%, red); */
+    /* transition: 0.3s; */
+}
+/* #warrior:hover {
+    background: var(--bg--color);
+} */
+#door{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#lantern {
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    /* background: radial-gradient(circle at 1000px 1000px, transparent 0%, black 100px); */
+    pointer-events: none;
+    /* transition: 0.3s; */
 }

@@ -12,29 +12,58 @@ level1 = [
 
 level2 = [
     [1,1,1,0,1,1,1,0,1,1],
-    [0,0,1,1,0,1,0,0,0,1],
+    [0,0,1,1,1,0,0,0,0,1],
     [1,1,1,0,1,1,1,0,1,0],
     [1,0,1,0,0,1,0,1,1,1],
-    [1,1,1,0,0,1,1,1,0,0],
-    [1,1,1,0,1,1,1,0,0,0],
+    [1,0,1,0,0,1,0,1,0,0],
+    [1,0,1,0,1,1,1,1,1,1],
+    [1,1,1,0,1,1,1,0,0,1],
     [1,0,0,0,1,0,1,0,1,1]
 ];
 
 
 
+// level3 = [
+//     [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
+//     [0,0,1,1,0,1,0,0,0,1,1,0,1,1,1,0,1,1],
+//     [1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1],
+//     [1,0,1,0,0,1,0,1,1,1,1,0,1,1,1,0,1,1],
+//     [1,1,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1],
+//     [1,1,1,1,1,1,1,0,0,0,1,0,1,1,1,0,1,1],
+//     [1,1,1,0,1,1,1,0,1,0,1,1,1,1,1,0,1,1],
+//     [1,1,1,0,1,1,1,0,0,0,1,0,1,1,1,0,1,1],
+//     [1,0,0,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1]
+// ];
+
 level3 = [
-    [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
-    [0,0,1,1,0,1,0,0,0,1,1,0,1,1,1,0,1,1],
-    [1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],
-    [1,0,1,0,0,1,0,1,1,1,1,0,1,1,1,0,1,1],
-    [1,1,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1],
-    [1,1,1,0,1,1,1,0,0,0,1,0,1,1,1,0,1,1],
-    [1,0,0,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1]
+    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+    [1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1]
+
 ];
 
+function setWarriorPosition (x,y) {
+    warrior.style.top = x + "px";
+    warrior.style.left = y + "px";
+};
+
+function setDoorPosition (x,y) {
+    door.style.top = x + "px";
+    door.style.left = y + "px";
+};
+
 // Hector TIP escalabilidad --> array con las posiciones que no puede pasar
+let mazeArray = level1;
 let chooseLevel = document.getElementById("levelSelect");
-let mazeArray;
 
 chooseLevel.addEventListener("change",
 function()
@@ -42,30 +71,35 @@ function()
     let level = chooseLevel.value;
     console.log(level);
 
-    switch (level) {
-        case 1:
-            mazeArray = level1;
-            break;
-        case 2:
-            mazeArray = level2;
-            break;
-        case 3:
-            mazeArray = level3;
-            break;
-        default:
-            mazeArray = level1;
-            break;
-    }
+    if (level == 1)
+    {
+        mazeArray = level1;
+        winPosition = [6,12];
+        setDoorPosition(300,500);
+    };
+    if (level == 2)
+    {
+        mazeArray = level2;
+        winPosition = [7,9];
+        setDoorPosition(50,50);
+    };
+    if (level == 3)
+    {
+        mazeArray = level3;
+        winPosition = [8,17];
+        setDoorPosition(200,500);
+    };
 
+    maze.innerHTML =
+    '<img src="images/warrior/warrior_down.gif" alt="warrior" id="warrior" height="50px" width="50px"> <img src="img/door.png" alt="door" id="door" height="50px" width="50px"> <div id="lantern"></div>'
     createMaze();
+    console.log(mazeArray[0].length);
 });
     
 let maze = document.getElementById("maze-container");
 let warrior= document.getElementById("warrior");
-function setWarriorPosition (x,y) {
-    warrior.style.top = x + "px";
-    warrior.style.left = y + "px";
-}
+let door= document.getElementById("door");
+
 // let warrior_up = document.getElementById("warrior_up");
 // let warrior_left = document.getElementById("warrior_left");
 // let warrior_right = document.getElementById("warrior_right");
@@ -77,6 +111,29 @@ function setWarriorPosition (x,y) {
 
 
 // 0 is wall, 1 is space, 2 is warrior
+
+// function winPosition(level)
+// {
+//     if (level == 1)
+//     {
+//         winPosition = [7,13];
+//     };
+//     if (level == 2)
+//     {
+//         winPosition = [8,10];
+//     };
+//     if (level == 3)
+//     {
+//         winPosition = [9,18];
+//     };
+
+//     return winPosition;
+// }
+
+
+
+
+
 function createMaze() {
     for (let i = 0; i < mazeArray.length; i++) {
         let row = document.createElement("div");
@@ -97,6 +154,7 @@ function createMaze() {
         }
         maze.appendChild(row);
     }
+    console.log("La lenght de la array es de " + mazeArray.length);
 
     //setWarriorPosition(0,0);
 }
@@ -119,8 +177,8 @@ function win(warriorPosition)
 {
     warriorPosition = getWarriorPosition();
     console.log(warriorPosition);
-    console.log(mazeArray.length);
-    if (warriorPosition[0] == (mazeArray.length - 1) && warriorPosition[1] == (mazeArray.length - 1))
+
+    if (warriorPosition[0] == winPosition[0] && warriorPosition[1] == winPosition[1])
     {
         alert("You win You win You win You win You win You win You win You win You win You win You win You win You win You win");
     }
@@ -134,10 +192,11 @@ document.addEventListener("keydown",
         let warriorLeft = warrior.offsetLeft;
         let warriorTop = warrior.offsetTop;
         let warriorPosition = getWarriorPosition();
+        let lantern= document.getElementById("lantern");
 
         if (e.key == "ArrowRight")
         {
-            if (warriorLeft < (mazeArray.length - 1) * 50)
+            if (warriorLeft < (mazeArray[0].length - 1) * 50)
             {
                 if (mazeArray[warriorPosition[0]][warriorPosition[1] + 1] == 1)
                 {
@@ -179,7 +238,7 @@ document.addEventListener("keydown",
         }
         if (e.key == "ArrowDown")
         {
-            if (warriorTop < (level1.length - 1) * 50)
+            if (warriorTop < (mazeArray.length - 1) * 50)
             {
                 if (mazeArray[warriorPosition[0] + 1][warriorPosition[1]] == 1)
                 {
@@ -190,39 +249,12 @@ document.addEventListener("keydown",
                 }
             }
         }
+        lantern.style.top = (warriorTop + (warrior.offsetHeight/2) - (lantern.offsetHeight /2)) + 'px';
+        lantern.style.left = (warriorLeft + (warrior.offsetWidth/2) - (lantern.offsetWidth /2)) + 'px';
         win(warriorPosition);
         console.log(mazeArray);
-    }
 
-    // [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    // [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    }
 
        // if warrior arrive here, win!
     //    if (warriorPosition == 2 && mazeArray == 2)
@@ -231,3 +263,7 @@ document.addEventListener("keydown",
     //    }
     //    console.log(mazeArray);
 );
+
+
+
+    

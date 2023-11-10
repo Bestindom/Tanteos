@@ -36,18 +36,21 @@ level2 = [
 // ];
 
 level3 = [
-    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-    [0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-    [1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1]
+    [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1],
+    [1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0],
+    [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0],
+    [1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1],
+    [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1],
+    [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+    [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1],
+    [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1]
 
 ];
 
@@ -64,6 +67,12 @@ function setDoorPosition (x,y) {
 // Hector TIP escalabilidad --> array con las posiciones que no puede pasar
 let mazeArray = level1;
 let chooseLevel = document.getElementById("levelSelect");
+let title = document.getElementById("title");
+let back = document.getElementById("back");
+let maze = document.getElementById("maze-container");
+let warrior= document.getElementById("warrior");
+let door= document.getElementById("door");
+
 
 chooseLevel.addEventListener("change",
 function()
@@ -86,55 +95,23 @@ function()
     if (level == 3)
     {
         mazeArray = level3;
-        winPosition = [8,17];
+        winPosition = [14,22];
         setDoorPosition(200,500);
     };
 
     maze.innerHTML =
-    '<img src="images/warrior/warrior_down.gif" alt="warrior" id="warrior" height="50px" width="50px"> <img src="img/door.png" alt="door" id="door" height="50px" width="50px"> <div id="lantern"></div>'
+    '<img src="images/warrior/warrior_down.gif" alt="warrior" id="warrior" height="50px" width="50px"> <img src="img/door.png" alt="door" id="door" height="50px" width="50px"> <div id="lantern"></div> <div id="lanternDoor"></div>'
     createMaze();
     console.log(mazeArray[0].length);
 });
     
-let maze = document.getElementById("maze-container");
-let warrior= document.getElementById("warrior");
-let door= document.getElementById("door");
-
-// let warrior_up = document.getElementById("warrior_up");
-// let warrior_left = document.getElementById("warrior_left");
-// let warrior_right = document.getElementById("warrior_right");
-
-// function warriorPosition(x, y) {
-//     position = [x , y];
-//     return position;
-// }
-
-
-// 0 is wall, 1 is space, 2 is warrior
-
-// function winPosition(level)
-// {
-//     if (level == 1)
-//     {
-//         winPosition = [7,13];
-//     };
-//     if (level == 2)
-//     {
-//         winPosition = [8,10];
-//     };
-//     if (level == 3)
-//     {
-//         winPosition = [9,18];
-//     };
-
-//     return winPosition;
-// }
 
 
 
+function createMaze()
+{
+    buttons();
 
-
-function createMaze() {
     for (let i = 0; i < mazeArray.length; i++) {
         let row = document.createElement("div");
         row.classList.add("row");
@@ -159,7 +136,8 @@ function createMaze() {
     //setWarriorPosition(0,0);
 }
 
-function getWarriorPosition() {
+function getWarriorPosition()
+{
     let position = [-1 , -1];
     for (let i = 0; i < mazeArray.length; i++) {
         for (let j = 0; j < mazeArray[i].length; j++) {
@@ -254,6 +232,14 @@ document.addEventListener("keydown",
         win(warriorPosition);
         console.log(mazeArray);
 
+
+        console.log("WARRIOR POSITION IS: " + warriorPosition);
+
+        // if ( mazeArray[warriorPosition[0]][warriorPosition[1]] == mazeArray[13][20])
+        // {
+        //     powerUP();
+        // }
+
     }
 
        // if warrior arrive here, win!
@@ -264,6 +250,26 @@ document.addEventListener("keydown",
     //    console.log(mazeArray);
 );
 
+function powerUP ()
+{
+    lantern.style.background = "radial-gradient(circle at 1500px 1500px, transparent 0%, black " + 1000 + "px)";
+};
 
+function buttons()
+{
+    maze.style.display = 'block';
+    back.style.display = 'flex';
+    chooseLevel.style.display = 'none';
+    title.style.fontSize = '60px';
+};
 
-    
+back.addEventListener("click",
+    function()
+    {
+        console.log('back');
+        maze.style.display = 'none';
+        title.style.fontSize = '150px';
+        back.style.display = 'none';
+        chooseLevel.style.display = 'block';
+    }
+);

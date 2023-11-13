@@ -10,12 +10,11 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include_once ('./menu.php') ?>
+    <?php include_once ('./php_partials/menu.php') ?>
 
     <div class="container">
 
         <?php
-            require_once ('./php_partials/message.php');
             
             if (isset($_SESSION['pokemon']))
             {
@@ -90,8 +89,7 @@
                         <div class="form-group row p-2">
                             <label for="image" class="col-sm 2 col-form-label">Image</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="image" name="image" placeholder="Pokemon Image"
-                                value="<?php echo $pokemon['image']?>">
+                                <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>
                     </div>

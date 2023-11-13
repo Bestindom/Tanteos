@@ -36,7 +36,7 @@
 
         if (isset($_SESSION['error']))
         {
-            header('Location: ../deletePokemon.php');
+            header('Location: ../gallery.php');
             exit();
         }
         else

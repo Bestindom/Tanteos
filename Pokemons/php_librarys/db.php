@@ -64,7 +64,21 @@ function selectPokemons() {
 
     $connection = openDb();
 
-    $statementTxt = "select * from pokemon";
+        
+
+    $statementTxt = "SELECT
+                        pokemon.num_pokedex as id_pokemon,
+                        pokemon.name,
+                        types.type,
+                        regions.region,
+                        pokemon.image
+                    FROM
+                        pokemon
+                    JOIN
+                        types ON pokemon.type = types.id_type
+                    JOIN
+                        regions ON pokemon.region = regions.id_region;
+                    ";
 
     $statement = $connection->prepare($statementTxt);
     $statement->execute();

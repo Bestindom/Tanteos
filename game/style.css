@@ -93,6 +93,10 @@ body {
     border: 1px solid black;
 }
 
+.door {
+    background-image: url(./img/door.png);
+}
+
 #warrior {
     position: absolute;
     top: 0px;
@@ -103,11 +107,11 @@ body {
 /* #warrior:hover {
     background: var(--bg--color);
 } */
-#door{
+/* #door{
     position: absolute;
     bottom: 0px;
     right: 0px;
-}
+} */
 
 #lantern {
     position: absolute;

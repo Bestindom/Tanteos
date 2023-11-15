@@ -6,19 +6,25 @@ level1 = [
     [1,0,1,0,1,0,1,1,1,0,1,0,0],
     [1,0,1,0,1,0,1,0,1,0,1,1,1],
     [1,1,1,0,1,0,1,1,1,0,0,0,1],
-    [1,0,0,0,1,0,1,0,1,1,1,0,1]
+    [1,0,0,0,1,0,1,0,1,1,1,0,3]
 ];
 
 
 level2 = [
-    [1,1,1,0,1,1,1,0,1,1],
-    [0,0,1,1,1,0,0,0,0,1],
-    [1,1,1,0,1,1,1,0,1,0],
-    [1,0,1,0,0,1,0,1,1,1],
-    [1,0,1,0,0,1,0,1,0,0],
-    [1,0,1,0,1,1,1,1,1,1],
-    [1,1,1,0,1,1,1,0,0,1],
-    [1,0,0,0,1,0,1,0,1,1]
+    [1, 1, 1, 1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1],
+    [0, 0, 1, 0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,1],
+    [1, 0, 1, 1 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1],
+    [1, 0, 0, 0 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1],
+    [1, 1, 1, 0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,1 ,0],
+    [1, 0, 0, 1 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,0],
+    [1, 1, 0, 0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0],
+    [0, 1, 1, 1 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,1 ,1],
+    [0, 0, 0, 1 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,1],
+    [1, 0, 1, 1 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1],
+    [1, 1, 1, 0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,0],
+    [1, 0, 0, 0 ,1 ,1 ,1 ,0 ,3 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,1],
+    [1, 0, 1, 1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,1],
+    [1, 1, 1, 0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,1]
 ];
 
 
@@ -50,19 +56,10 @@ level3 = [
     [1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0],
     [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1],
     [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3]
 
 ];
 
-function setWarriorPosition (x,y) {
-    warrior.style.top = x + "px";
-    warrior.style.left = y + "px";
-};
-
-function setDoorPosition (x,y) {
-    door.style.top = x + "px";
-    door.style.left = y + "px";
-};
 
 // Hector TIP escalabilidad --> array con las posiciones que no puede pasar
 let mazeArray = level1;
@@ -72,6 +69,7 @@ let back = document.getElementById("back");
 let maze = document.getElementById("maze-container");
 let warrior= document.getElementById("warrior");
 let door= document.getElementById("door");
+
 
 
 chooseLevel.addEventListener("change",
@@ -84,23 +82,20 @@ function()
     {
         mazeArray = level1;
         winPosition = [6,12];
-        setDoorPosition(300,500);
     };
     if (level == 2)
     {
         mazeArray = level2;
         winPosition = [7,9];
-        setDoorPosition(50,50);
     };
     if (level == 3)
     {
         mazeArray = level3;
         winPosition = [14,22];
-        setDoorPosition(200,500);
     };
 
     maze.innerHTML =
-    '<img src="images/warrior/warrior_down.gif" alt="warrior" id="warrior" height="50px" width="50px"> <img src="img/door.png" alt="door" id="door" height="50px" width="50px"> <div id="lantern"></div> <div id="lanternDoor"></div>'
+    '<img src="images/warrior/warrior_down.gif" alt="warrior" id="warrior" height="50px" width="50px"> <div id="lantern"></div> <div id="lanternDoor"></div>'
     createMaze();
     console.log(mazeArray[0].length);
 });
@@ -127,7 +122,12 @@ function createMaze()
             if (i == 0 && j == 0) {
                 mazeArray[i][j] = 2;
             }
+
+            if (mazeArray[i][j] == 3) {
+                cell.classList.add("door");
+            }
             row.appendChild(cell);
+        
         }
         maze.appendChild(row);
     }

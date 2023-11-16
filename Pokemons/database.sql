@@ -39,12 +39,10 @@ CREATE TABLE `types` (
 DROP TABLE IF EXISTS `pokemon_type`;
 CREATE TABLE `pokemon_type` (
   `id_pokemon` int not null,
-  `id_type1` int not null,
-  `id_type2` int,
-  PRIMARY KEY (id_pokemon, id_type1),
+  `id_type` int not null,
+  PRIMARY KEY (id_pokemon, id_type),
   FOREIGN KEY (`id_pokemon`) REFERENCES `pokemon` (`id_pokemon`),
-  FOREIGN KEY (`id_type1`) REFERENCES `types` (`id_type`),
-  FOREIGN KEY (`id_type2`) REFERENCES `types` (`id_type`)
+  FOREIGN KEY (`id_type`) REFERENCES `types` (`id_type`)
 );
 	
 
@@ -81,13 +79,11 @@ INSERT INTO regions VALUES
 ('9', 'Paldea');
 
 INSERT INTO `pokemon` (num_pokedex, name, region, image) values
-(001, 'Bulbasaur', '1', './images/001.png'),
-(002, 'Ivysaur', '2', './images/002.png'),
-(003, 'Venusaur' , '3', './images/003.png');
+(2, 'Bulbasaur', '1', './images/001.png'),
+(66, 'Ivysaur', '2', './images/002.png'),
+(8, 'Venusaur' , '3', './images/003.png');
 
 INSERT INTO pokemon_type values
-(001, 4, null),
-(002, 5, null),
-(003, 7, 8);
-
-
+(001, 4),
+(002, 5),
+(003, 7);

@@ -9,7 +9,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost/php_basico/Pokemons/gallery.php",
+            "url": "http://localhost:8080/php_basico/Pokemons/gallery.php",
             "webRoot": "${workspaceFolder}"
         },
         {

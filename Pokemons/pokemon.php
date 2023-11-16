@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +32,7 @@
         
         ?>
 
+        <?php require_once ('./php_partials/message.php'); ?>
         <div class="card mt-2">
             <div class="card-header bg-secondary text-white">
                 Pokemon
@@ -42,7 +43,7 @@
                     <div class="form-group row p-2">
                         <label for="id_pokemon" class="col-sm 2 col-form-label">Identificator</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id_pokemon" name="id_pokemon" placeholder="Pokemon #"
+                            <input type="text" class="form-control" id="num_pokedex" name="num_pokedex" placeholder="Pokemon #"
                             value="<?php echo $pokemon['num_pokedex']?>">
                         </div>
                     </div>
@@ -56,33 +57,91 @@
                         </div>
                     </div>
 
+                    <!-- Pokemon Region -->
+                    <div class="form-group row p-2">
+                        <label for="name" class="col-sm 2 col-form-label">Region</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="region" name="region" aria-label="Default select example">
+                                <option selected>Pokemon Regions</option>
+                                <option value="1">Kanto</option>
+                                <option value="2">Johto</option>
+                                <option value="3">Hoenn</option>
+                                <option value="4">Sinnoh</option>
+                                <option value="5">Teselia</option>
+                                <option value="6">Kalos</option>
+                                <option value="7">Alola</option>
+                                <option value="8">Galar</option>
+                                <option value="9">Paldea</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <!-- Pokemon Type -->
                     <div class="form-group row p-2">
                         <label for="type" class="col-sm 2 col-form-label">Type</label>
                         <div class="col-sm-10">
-                            <select class="form-select" name="type" aria-label="Default select example">
-                                <option selected>Pokemon Type</option>
-                                <option>Normal</option>
-                                <option>Fire</option>
-                                <option>Water</option>
-                                <option>Grass</option>
-                                <option>Electric</option>
-                                <option>Ice</option>
-                                <option>Fighting</option>
-                                <option>Poison</option>
-                                <option>Ground</option>
-                                <option>Flying</option>
-                                <option>Psychic</option>
-                                <option>Bug</option>
-                                <option>Rock</option>
-                                <option>Ghost</option>
-                                <option>Dragon</option>
-                                <option>Dark</option>
-                                <option>Steel</option>
-                                <option>Fairy</option>
-                            </select>
+                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                <div>
+                                    <input type="checkbox" class="btn-check" id="Normal" name="types[]" autocomplete="off" value="1">
+                                    <label class="btn btn-outline-primary" for="Normal">Normal</label>
+
+                                    <input type="checkbox" class="btn-check" id="Fire" name="types[]" autocomplete="off" value="2">
+                                    <label class="btn btn-outline-primary" for="Fire">Fire</label>
+
+                                    <input type="checkbox" class="btn-check" id="Water" name="types[]" autocomplete="off" value="3">
+                                    <label class="btn btn-outline-primary" for="Water">Water</label>
+
+                                    <input type="checkbox" class="btn-check" id="Grass" name="types[]" autocomplete="off" value="4">
+                                    <label class="btn btn-outline-primary" for="Grass">Grass</label>
+
+                                    <input type="checkbox" class="btn-check" id="Electric" name="types[]" autocomplete="off" value="5">
+                                    <label class="btn btn-outline-primary" for="Electric">Electric</label>
+
+                                    <input type="checkbox" class="btn-check" id="Ice" name="types[]" autocomplete="off" value="6">
+                                    <label class="btn btn-outline-primary" for="Ice">Ice</label>
+
+                                    <input type="checkbox" class="btn-check" id="Fighting" name="types[]" autocomplete="off" value="7">
+                                    <label class="btn btn-outline-primary" for="Fighting">Fighting</label>
+
+                                    <input type="checkbox" class="btn-check" id="Poison" name="types[]" autocomplete="off" value="8">
+                                    <label class="btn btn-outline-primary" for="Poison">Poison</label>
+
+                                    <input type="checkbox" class="btn-check" id="Ground" name="types[]" autocomplete="off" value="9">
+                                    <label class="btn btn-outline-primary" for="Ground">Ground</label>
+
+                                    <input type="checkbox" class="btn-check" id="Flying" name="types[]" autocomplete="off" value="10">
+                                    <label class="btn btn-outline-primary" for="Flying">Flying</label>
+
+                                    <input type="checkbox" class="btn-check" id="Psychic" name="types[]" autocomplete="off" value="11">
+                                    <label class="btn btn-outline-primary" for="Psychic">Psychic</label>
+
+                                    <input type="checkbox" class="btn-check" id="Bug" name="types[]" autocomplete="off" value="12">
+                                    <label class="btn btn-outline-primary" for="Bug">Bug</label>
+
+                                    <input type="checkbox" class="btn-check" id="Rock" name="types[]" autocomplete="off" value="13">
+                                    <label class="btn btn-outline-primary" for="Rock">Rock</label>
+
+                                    <input type="checkbox" class="btn-check" id="Ghost" name="types[]" autocomplete="off" value="14">
+                                    <label class="btn btn-outline-primary" for="Ghost">Ghost</label>
+
+                                    <input type="checkbox" class="btn-check" id="Dragon" name="types[]" autocomplete="off" value="15">
+                                    <label class="btn btn-outline-primary" for="Dragon">Dragon</label>
+
+                                    <input type="checkbox" class="btn-check" id="Dark" name="types[]" autocomplete="off" value="16">
+                                    <label class="btn btn-outline-primary" for="Dark">Dark</label>
+
+                                    <input type="checkbox" class="btn-check" id="Steel" name="types[]" autocomplete="off" value="17">
+                                    <label class="btn btn-outline-primary" for="Steel">Steel</label>
+
+                                    <input type="checkbox" class="btn-check" id="Fairy" name="types[]" autocomplete="off" value="18">
+                                    <label class="btn btn-outline-primary" for="Fairy">Fairy</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
 
                     <!-- Pokemon Image -->
                     <div>
@@ -109,7 +168,6 @@
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     
 </body>

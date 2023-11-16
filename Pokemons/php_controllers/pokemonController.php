@@ -7,7 +7,7 @@
     {
 
          $temporalName = $_FILES['image']['tmp_name'];
-         $imgName = $_POST['id_pokemon'] . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+         $imgName = $_POST['num_pokedex'] . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 
          // Especifica la carpeta de destino en el servidor
          $path = '../images/' . $imgName;
@@ -15,7 +15,15 @@
         if( move_uploaded_file($temporalName, $path))
         {
             echo 'Se ha movido a ' . $path;
-            insertPokemon($_POST['id_pokemon'], $_POST['name'], './images/' . $imgName);    
+            $id_pokemon = insertPokemon($_POST['num_pokedex'], $_POST['name'], $_POST['region'], './images/' . $imgName);
+
+            if(isset($_POST['types']) && is_array($_POST['types']))
+            {
+                foreach($_POST['types'] as $id_type)
+                {
+                    insertPokemon_type($id_pokemon, $id_type);
+                };
+            };
 
             if (isset($_SESSION['error']))
             {
@@ -26,7 +34,7 @@
             {
                 header('Location: ../gallery.php');
                 exit();
-            }
+            };
         }
     }
 

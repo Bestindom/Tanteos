@@ -45,7 +45,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -70,8 +70,7 @@ function selectPokemons() {
                         p.name,
                         r.region,
                         p.image,
-                        t1.name_type AS type1,
-                        t2.name_type AS type2
+                        t.name_type AS type
                     FROM
                         pokemon p
                     JOIN
@@ -79,9 +78,7 @@ function selectPokemons() {
                     JOIN
                         pokemon_type pt ON p.id_pokemon = pt.id_pokemon
                     JOIN
-                        types t1 ON pt.id_type1 = t1.id_type
-                    LEFT JOIN
-                        types t2 ON pt.id_type2 = t2.id_type;
+                        types t ON pt.id_type = t.id_type
                     ";
 
     $statement = $connection->prepare($statementTxt);
@@ -95,34 +92,30 @@ function selectPokemons() {
     return $result;
 }
 
-function insertPokemon($num_pokedex, $name, $image) {
+function insertPokemon($num_pokedex, $name, $region, $image) {
 
     try 
     {
         $connection = openDb();
 
-        $statementTxt = "insert into pokemon (num_pokedex, name , image) values (:num_pokedex, :name, :image)";
+        $statementTxt = "insert into pokemon (num_pokedex, name , region, image) values (:num_pokedex, :name, :region, :image);";
         $statement = $connection->prepare($statementTxt);
         $statement->bindParam(':num_pokedex', $num_pokedex);
         $statement->bindParam(':name', $name);
+        $statement->bindParam(':region', $region);
         $statement->bindParam(':image', $image);
-        $statement->execute();
-
-        $statementTxt2 = "INSERT INTO pokemon_type (id_pokemon, id_type1, id_type2) values (:id_pokemon, :id_type1, :id_type2)";
-        $statement = $connection->prepare($statementTxt2);
-        $statement->bindParam(':id_type1', $id_type1);
-        $statement->bindParam(':id_type2', $id_type2);
         $statement->execute();
 
         $_SESSION['message'] = 'Record inserted succesfully';
 
+        return $connection->lastInsertId();
     }
     catch (PDOException $e) 
     {
         $_SESSION['error'] = errorMessage($e);
         $pokemon['num_pokedex'] = $num_pokedex;
         $pokemon['name'] = $name;
-        // $pokemon['type'] = $type;
+        $pokemon['region'] = $region;
         $pokemon['image'] = $image;
         //I saved this varible session to hold data that user inserted
         $_SESSION['pokemon'] = $pokemon;
@@ -130,6 +123,26 @@ function insertPokemon($num_pokedex, $name, $image) {
 
     $connection = closeDb();
 }
+
+function insertPokemon_type ($id_pokemon, $id_type) {
+    try
+    {
+        $connection = openDb();
+
+        $statementTxt = "INSERT INTO pokemon_type (id_pokemon, id_type) values (:id_pokemon, :id_type)";
+        $statement = $connection->prepare($statementTxt);
+        $statement->bindParam(':id_pokemon', $id_pokemon);
+        $statement->bindParam(':id_type', $id_type);
+        $statement->execute();
+    }
+    catch (PDOException $e)
+    {
+        $_SESSION['error'] = errorMessage($e);
+    }
+
+    $connection = closeDb();
+};
+
 
 function deletePokemon ($id_pokemon) {
 

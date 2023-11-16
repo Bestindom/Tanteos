@@ -24,9 +24,11 @@
                 <div class="card h-100">
                 <img src="<?php echo $pokemon['image']; ?>" class="card-img-top" alt="dead pokemon" value="<?php $pokemon['id_pokemon']; ?>">
                     <div class="card-body in-line">
-                        <h5 class="card-title"><?php echo $pokemon['id_pokemon']; ?></h5>
+                        <h5 class="card-title"><?php echo $pokemon['num_pokedex']; ?></h5>
                         <h5 class="card-title"><?php echo $pokemon['name']; ?></h5>
-                        <h5 class="card-title"><?php echo $pokemon['type']; ?></h5>
+                        <h5 class="card-title"><?php echo $pokemon['type1']; ?></h5>
+                        <h5 class="card-title"><?php echo $pokemon['type2']; ?></h5>
+                        <h5 class="card-title"><?php echo $pokemon['region']; ?></h5>
                     </div>
 
                     <form action="./php_controllers/pokemonController.php" method="POST">

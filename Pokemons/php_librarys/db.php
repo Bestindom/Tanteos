@@ -45,7 +45,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "mysql";
+    $password = "root";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -64,20 +64,24 @@ function selectPokemons() {
 
     $connection = openDb();
 
-        
-
     $statementTxt = "SELECT
-                        pokemon.num_pokedex as id_pokemon,
-                        pokemon.name,
-                        types.type,
-                        regions.region,
-                        pokemon.image
+                        p.id_pokemon,
+                        p.num_pokedex,
+                        p.name,
+                        r.region,
+                        p.image,
+                        t1.name_type AS type1,
+                        t2.name_type AS type2
                     FROM
-                        pokemon
+                        pokemon p
                     JOIN
-                        types ON pokemon.type = types.id_type
+                        regions r ON p.region = r.id_region
                     JOIN
-                        regions ON pokemon.region = regions.id_region;
+                        pokemon_type pt ON p.id_pokemon = pt.id_pokemon
+                    JOIN
+                        types t1 ON pt.id_type1 = t1.id_type
+                    LEFT JOIN
+                        types t2 ON pt.id_type2 = t2.id_type;
                     ";
 
     $statement = $connection->prepare($statementTxt);
@@ -91,18 +95,23 @@ function selectPokemons() {
     return $result;
 }
 
-function insertPokemon($id_pokemon, $name, $image) {
+function insertPokemon($num_pokedex, $name, $image) {
 
     try 
     {
         $connection = openDb();
 
-        $statementTxt = "insert into pokemon (id_pokemon, name , image) values (:id_pokemon, :name, :image)";
+        $statementTxt = "insert into pokemon (num_pokedex, name , image) values (:num_pokedex, :name, :image)";
         $statement = $connection->prepare($statementTxt);
-        $statement->bindParam(':id_pokemon', $id_pokemon);
+        $statement->bindParam(':num_pokedex', $num_pokedex);
         $statement->bindParam(':name', $name);
-        //$statement->bindParam(':type', $type);
         $statement->bindParam(':image', $image);
+        $statement->execute();
+
+        $statementTxt2 = "INSERT INTO pokemon_type (id_pokemon, id_type1, id_type2) values (:id_pokemon, :id_type1, :id_type2)";
+        $statement = $connection->prepare($statementTxt2);
+        $statement->bindParam(':id_type1', $id_type1);
+        $statement->bindParam(':id_type2', $id_type2);
         $statement->execute();
 
         $_SESSION['message'] = 'Record inserted succesfully';
@@ -111,7 +120,7 @@ function insertPokemon($id_pokemon, $name, $image) {
     catch (PDOException $e) 
     {
         $_SESSION['error'] = errorMessage($e);
-        $pokemon['id_pokemon'] = $id_pokemon;
+        $pokemon['num_pokedex'] = $num_pokedex;
         $pokemon['name'] = $name;
         // $pokemon['type'] = $type;
         $pokemon['image'] = $image;

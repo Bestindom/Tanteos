@@ -29,13 +29,6 @@ CREATE TABLE `pokemon` (
 );
 
 
-DROP TABLE IF EXISTS `types`;
-CREATE TABLE `types` (
-  `id_type` int not null,
-  `name_type` varchar(50) not null,
-  PRIMARY KEY (id_type)
-);
-
 DROP TABLE IF EXISTS `pokemon_type`;
 CREATE TABLE `pokemon_type` (
   `id_pokemon` int not null,
@@ -88,6 +81,6 @@ INSERT INTO `pokemon` (num_pokedex, name, region, image) values
 INSERT INTO pokemon_type values
 (001, 4, null),
 (002, 5, null),
-(003, 7, 8);
+(002, 7, 8);
 
 

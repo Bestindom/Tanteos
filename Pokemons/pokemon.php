@@ -24,7 +24,7 @@
             else
             {
                 $pokemon = [
-                    'id_pokemon' => '',
+                    'num_pokedex' => '',
                     'name' => '',
                     'type' => ''
                 ];
@@ -43,7 +43,7 @@
                         <label for="id_pokemon" class="col-sm 2 col-form-label">Identificator</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="id_pokemon" name="id_pokemon" placeholder="Pokemon #"
-                            value="<?php echo $pokemon['id_pokemon']?>">
+                            value="<?php echo $pokemon['num_pokedex']?>">
                         </div>
                     </div>
 
@@ -62,24 +62,24 @@
                         <div class="col-sm-10">
                             <select class="form-select" name="type" aria-label="Default select example">
                                 <option selected>Pokemon Type</option>
-                                <option value="<?php echo $pokemon['type']?>">Normal</option>
-                                <option value="<?php echo $pokemon['type']?>">Fire</option>
-                                <option value="<?php echo $pokemon['type']?>">Water</option>
-                                <option value="<?php echo $pokemon['type']?>">Grass</option>
-                                <option value="<?php echo $pokemon['type']?>">Electric</option>
-                                <option value="<?php echo $pokemon['type']?>">Ice</option>
-                                <option value="<?php echo $pokemon['type']?>">Fighting</option>
-                                <option value="<?php echo $pokemon['type']?>">Poison</option>
-                                <option value="<?php echo $pokemon['type']?>">Ground</option>
-                                <option value="<?php echo $pokemon['type']?>">Flying</option>
-                                <option value="<?php echo $pokemon['type']?>">Psychic</option>
-                                <option value="<?php echo $pokemon['type']?>">Bug</option>
-                                <option value="<?php echo $pokemon['type']?>">Rock</option>
-                                <option value="<?php echo $pokemon['type']?>">Ghost</option>
-                                <option value="<?php echo $pokemon['type']?>">Dragon</option>
-                                <option value="<?php echo $pokemon['type']?>">Dark</option>
-                                <option value="<?php echo $pokemon['type']?>">Steel</option>
-                                <option value="<?php echo $pokemon['type']?>">Fairy</option>
+                                <option>Normal</option>
+                                <option>Fire</option>
+                                <option>Water</option>
+                                <option>Grass</option>
+                                <option>Electric</option>
+                                <option>Ice</option>
+                                <option>Fighting</option>
+                                <option>Poison</option>
+                                <option>Ground</option>
+                                <option>Flying</option>
+                                <option>Psychic</option>
+                                <option>Bug</option>
+                                <option>Rock</option>
+                                <option>Ghost</option>
+                                <option>Dragon</option>
+                                <option>Dark</option>
+                                <option>Steel</option>
+                                <option>Fairy</option>
                             </select>
                         </div>
                     </div>

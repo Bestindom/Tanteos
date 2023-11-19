@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,7 @@
     <?php include_once ('./php_partials/menu.php') ?>
 
     <div class="container">
+        <?php require_once ('./php_partials/message.php'); ?>
 
         <?php
             
@@ -31,8 +34,6 @@
             }
         
         ?>
-
-        <?php require_once ('./php_partials/message.php'); ?>
         <div class="card mt-2">
             <div class="card-header bg-secondary text-white">
                 Pokemon

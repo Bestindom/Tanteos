@@ -2,6 +2,7 @@
 
 session_start();
 
+
 function errorMessage($e)
     {
         if (!empty($e->errorInfo[1]))
@@ -13,6 +14,9 @@ function errorMessage($e)
                     break;
                 case 1451:
                     $message = 'Record with related elements';
+                    break;
+                case 1048:
+                    $message = 'This number already exists in pokedex';
                     break;
                 default:
                     $message = $e->errorInfo[1] . ' - ' . $e->errorInfo[2];
@@ -45,7 +49,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "mysql";
+    $password = "root";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -66,11 +70,11 @@ function selectPokemons() {
 
     $statementTxt = "SELECT
                         p.id_pokemon,
-                        p.num_pokedex,
-                        p.name,
-                        r.region,
-                        p.image,
-                        t.name_type AS type
+                        MAX(p.num_pokedex) as num_pokedex,
+                        MAX(p.name) as name,
+                        MAX(r.region) as region,
+                        MAX(p.image) as image,
+                        GROUP_CONCAT(t.name_type) AS type
                     FROM
                         pokemon p
                     JOIN
@@ -79,6 +83,8 @@ function selectPokemons() {
                         pokemon_type pt ON p.id_pokemon = pt.id_pokemon
                     JOIN
                         types t ON pt.id_type = t.id_type
+                    GROUP BY
+                        p.id_pokemon
                     ";
 
     $statement = $connection->prepare($statementTxt);
@@ -150,7 +156,34 @@ function deletePokemon ($id_pokemon) {
     {
         $connection = openDb();
 
+        deletePokemon_type($id_pokemon);
+
         $statementTxt = "delete from pokemon where (id_pokemon = :id_pokemon)";
+        $statement = $connection->prepare($statementTxt);
+        $statement->bindParam(':id_pokemon', $id_pokemon);
+        $statement->execute();
+
+        $_SESSION['message'] = 'Delete succesfully';
+
+    }
+    catch (PDOException $e) 
+    {
+        $_SESSION['error'] = errorMessage($e);
+        $pokemon['id_pokemon'] = $id_pokemon;
+        //I saved this varible session to hold data that user inserted
+        $_SESSION['pokemon'] = $pokemon;
+    }
+
+    $connection = closeDb();
+}
+
+
+function deletePokemon_type ($id_pokemon) {
+    try 
+    {
+        $connection = openDb();
+
+        $statementTxt = "delete from pokemon_type where (id_pokemon = :id_pokemon)";
         $statement = $connection->prepare($statementTxt);
         $statement->bindParam(':id_pokemon', $id_pokemon);
         $statement->execute();

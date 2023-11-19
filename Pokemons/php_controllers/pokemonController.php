@@ -17,13 +17,22 @@
             echo 'Se ha movido a ' . $path;
             $id_pokemon = insertPokemon($_POST['num_pokedex'], $_POST['name'], $_POST['region'], './images/' . $imgName);
 
+            // Im verify if array types exists and is it an array
             if(isset($_POST['types']) && is_array($_POST['types']))
             {
-                foreach($_POST['types'] as $id_type)
+                //if types array is empty, 
+                if(empty(($_POST['types']))) {
+                    $_SESSION['error'];
+                }
+                else
                 {
-                    insertPokemon_type($id_pokemon, $id_type);
-                };
+                    foreach($_POST['types'] as $id_type)
+                    {
+                        insertPokemon_type($id_pokemon, $id_type);
+                    }
+                }
             };
+
 
             if (isset($_SESSION['error']))
             {
@@ -53,4 +62,5 @@
             exit();
         }
     }
+
 ?>

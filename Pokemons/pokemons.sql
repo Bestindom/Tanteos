@@ -84,6 +84,6 @@ INSERT INTO `pokemon` (num_pokedex, name, region, image) values
 (8, 'Venusaur' , '3', './images/003.png');
 
 INSERT INTO pokemon_type values
-(001, 4),
-(002, 5),
-(003, 7);
+(1, 4),
+(2, 5),
+(3, 7);

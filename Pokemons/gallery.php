@@ -31,23 +31,30 @@
                         <h5 class="card-title"><?php echo $pokemon['region']; ?></h5>
                     </div>
 
-                    <form action="./php_controllers/pokemonController.php" method="POST">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-outline-warning">
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <form action="./update.php" method="POST">
+                            <input type="hidden" name="id_pokemon" value="<?php echo $pokemon['id_pokemon']?>">
+                            <input type="hidden" name="num_pokedex" value="<?php echo $pokemon['num_pokedex']?>">
+                            <input type="hidden" name="name" value="<?php echo $pokemon['name']?>">
+                            <input type="hidden" name="type" value="<?php echo $pokemon['type']?>">
+                            <input type="hidden" name="region" value="<?php echo $pokemon['region']?>">
+                               
+                            <button type="submit" class="btn btn-outline-warning" name="update">
                                 <i class="fa-solid fa-pen-to-square fa-xl"></i>
                             </button>
-                            <!-- <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" name="openModal">
-                                <input type="hidden" name="id_pokemon" value="<?php echo $pokemon['id_pokemon']?>">
-                                <?php echo $pokemon['id_pokemon']?>
-                                <?php $idCard = $pokemon['id_pokemon']?>
-                                <i class="fa-solid fa-trash-can fa-xl"></i>
-                            </button> -->
+                        </form>
+                        <!-- <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" name="openModal">
+                            <input type="hidden" name="id_pokemon" value="<?php echo $pokemon['id_pokemon']?>">
+                            <i class="fa-solid fa-trash-can fa-xl"></i>
+                        </button> -->
+                        <form action="./php_controllers/pokemonController.php" method="POST">
                             <button type="submit" class="btn btn-outline-danger" name="delete">
-                                <?php echo $pokemon['id_pokemon']?>
                                 <input type="hidden" name="id_pokemon" value="<?php echo $pokemon['id_pokemon']?>">
                                 <i class="fa-solid fa-trash-can fa-xl"></i>
                             </button>
-                        </div>
+                        </form>
+                    </div>
 
 
                         <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -73,7 +80,7 @@
                                 </div>
                             </div>
                         </div> -->
-                    </form>
+                    
                 </div>
             </div>
         <?php } ?>

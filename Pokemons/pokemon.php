@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    require_once('./php_librarys/db.php');
+
+    $regions = selectRegions();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +42,10 @@
             </div>
             <div class="card-body">
                 <form action="./php_controllers/pokemonController.php" method="POST" enctype="multipart/form-data">
+
                     <!-- Pokemon Identificator -->
                     <div class="form-group row p-2">
-                        <label for="id_pokemon" class="col-sm 2 col-form-label">Identificator</label>
+                        <label for="num_pokedex" class="col-sm 2 col-form-label">Identificator</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="num_pokedex" name="num_pokedex" placeholder="Pokemon #"
                             value="<?php echo $pokemon['num_pokedex']?>">
@@ -63,16 +66,10 @@
                         <label for="name" class="col-sm 2 col-form-label">Region</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="region" name="region" aria-label="Default select example">
-                                <option selected>Pokemon Regions</option>
-                                <option value="1">Kanto</option>
-                                <option value="2">Johto</option>
-                                <option value="3">Hoenn</option>
-                                <option value="4">Sinnoh</option>
-                                <option value="5">Teselia</option>
-                                <option value="6">Kalos</option>
-                                <option value="7">Alola</option>
-                                <option value="8">Galar</option>
-                                <option value="9">Paldea</option>
+                                <option value="" selected>Region</option>
+                                <?php foreach ($regions as $region) { ?>
+                                    <option value="<?php echo $region['id_region']; ?>"><?php echo $region['region']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

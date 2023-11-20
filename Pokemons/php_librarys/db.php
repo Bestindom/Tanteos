@@ -49,7 +49,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -97,6 +97,79 @@ function selectPokemons() {
 
     return $result;
 }
+
+function selectPokemonsById($id_pokemon) {
+
+    $connection = openDb();
+
+    $statementTxt = "SELECT
+                        p.id_pokemon,
+                        MAX(p.num_pokedex) as num_pokedex,
+                        MAX(p.name) as name,
+                        MAX(r.region) as region,
+                        MAX(p.image) as image,
+                        GROUP_CONCAT(t.name_type) AS type
+                    FROM
+                        pokemon p
+                    JOIN
+                        regions r ON p.region = r.id_region
+                    JOIN
+                        pokemon_type pt ON p.id_pokemon = pt.id_pokemon
+                    JOIN
+                        types t ON pt.id_type = t.id_type
+                    WHERE
+                        p.id_pokemon = :id_pokemon
+                    GROUP BY
+                        p.id_pokemon;
+                    ";
+
+    $statement = $connection->prepare($statementTxt);
+    $statement->bindParam(':id_pokemon', $id_pokemon);
+    $statement->execute();
+
+    // fetchAll return me an associative array (data table)
+    $result = $statement->fetchAll();
+
+    $connection = closeDb();
+
+    return $result;
+}
+
+
+function selectRegions() {
+
+    $connection = openDb();
+
+    $statementTxt = "SELECT * FROM regions;";
+
+    $statement = $connection->prepare($statementTxt);
+    $statement->execute();
+
+    // fetchAll return me an associative array (data table)
+    $result = $statement->fetchAll();
+
+    $connection = closeDb();
+
+    return $result;
+}
+
+function selectTypes() {
+
+    $connection = openDb();
+
+    $statementTxt = "SELECT * FROM types;";
+
+    $statement = $connection->prepare($statementTxt);
+    $statement->execute();
+
+    // fetchAll return me an associative array (data table)
+    $result = $statement->fetchAll();
+
+    $connection = closeDb();
+
+    return $result;
+}
+
 
 function insertPokemon($num_pokedex, $name, $region, $image) {
 
@@ -200,6 +273,41 @@ function deletePokemon_type ($id_pokemon) {
     }
 
     $connection = closeDb();
+}
+
+
+function updatePokemon ($id_pokemon, $num_pokedex, $name, $region, $image) {
+
+    try 
+    {
+        $connection = openDb();
+
+        $statementTxt = "insert into pokemon (id_pokemon, num_pokedex, name , region, image) values (:id_pokemon, :num_pokedex, :name, :region, :image);";
+        $statement = $connection->prepare($statementTxt);
+        $statement->bindParam(':id_pokemon', $id_pokemon);
+        $statement->bindParam(':num_pokedex', $num_pokedex);
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':region', $region);
+        $statement->bindParam(':image', $image);
+        $statement->execute();
+
+        $_SESSION['message'] = 'Record inserted succesfully';
+
+        return $connection->lastInsertId();
+    }
+    catch (PDOException $e) 
+    {
+        $_SESSION['error'] = errorMessage($e);
+        $pokemon['num_pokedex'] = $num_pokedex;
+        $pokemon['name'] = $name;
+        $pokemon['region'] = $region;
+        $pokemon['image'] = $image;
+        //I saved this varible session to hold data that user inserted
+        $_SESSION['pokemon'] = $pokemon;
+    }
+
+    $connection = closeDb();
+
 }
 
 ?>

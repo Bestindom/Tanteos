@@ -5,7 +5,7 @@
 
     $types = selectTypes();
     
-    $pokemon = selectPokemonsById($_POST['id_pokemon']);
+    $id_pokemon = $_POST['id_pokemon'];
 
     $checkedTypes = [];
 ?>
@@ -79,7 +79,6 @@
                                     <?php foreach ($types as $type) { ?>
                                         <?php 
                                         // Comprobar si el string tiene comas
-                                        //AQUÍ ESTÁ EL PROBLEMA, ESTE BUCLE DEBE IR FUERA, O SINO SIMEPRE SE EJECUTA EL ARRAYtYPES Y NO PASA MÁS ALLÁ DEL arrayTypes[0] :)
                                         if (str_contains($_POST['type'], ',')) {
                                             // Realizar el explode solo si hay comas
                                             $arrayTypes = explode(",", $_POST['type']);
@@ -113,7 +112,9 @@
                                             if ($checked !== $type['id_type']) {?>
                                                 <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" autocomplete="off" value="<?php echo $type['id_type']; ?>">
                                                 <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>
-                                            <?php } ?>
+                                            <?php 
+                                                $checkedTypes = [];
+                                            } ?>
                                         <?php } ?>
                                     <?php } ?>
                                 </div>
@@ -132,11 +133,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" name=id_pokemon value="<?php echo $id_pokemon ?>">
                     <!-- Form buttons -->
                     <div class="p-2">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-primary" name="insert">Accept</button>
+                            <button type="submit" class="btn btn-primary" name="update">Accept
+                            <?php echo $id_pokemon?>
+                            </button>
                             <a href="./gallery.php" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>

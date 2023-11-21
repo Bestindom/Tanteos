@@ -49,7 +49,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception
@@ -264,7 +264,7 @@ function deletePokemon_type ($id_pokemon) {
         $_SESSION['message'] = 'Delete succesfully';
 
     }
-    catch (PDOException $e) 
+    catch (PDOException $e)
     {
         $_SESSION['error'] = errorMessage($e);
         $pokemon['id_pokemon'] = $id_pokemon;
@@ -282,7 +282,23 @@ function updatePokemon ($id_pokemon, $num_pokedex, $name, $region, $image) {
     {
         $connection = openDb();
 
-        $statementTxt = "insert into pokemon (id_pokemon, num_pokedex, name , region, image) values (:id_pokemon, :num_pokedex, :name, :region, :image);";
+        $statementTxt = "
+                        update pokemon
+                        set name = :name
+                        where id_pokemon = :id_pokemon;
+                        
+                        update pokemon
+                        set num_pokedex = :num_pokedex
+                        where id_pokemon = :id_pokemon;
+                        
+                        update pokemon
+                        set region = :region
+                        where id_pokemon = :id_pokemon;
+
+                        update pokemon
+                        set image = :image
+                        where id_pokemon = :id_pokemon;
+                        ";
         $statement = $connection->prepare($statementTxt);
         $statement->bindParam(':id_pokemon', $id_pokemon);
         $statement->bindParam(':num_pokedex', $num_pokedex);

@@ -6,6 +6,8 @@
     $types = selectTypes();
     
     $pokemon = selectPokemonsById($_POST['id_pokemon']);
+
+    $checkedTypes = [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,12 +77,43 @@
                             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                                 <div>
                                     <?php foreach ($types as $type) { ?>
-                                        <input type="checkbox" class="btn-check" id="type" name="types[]" autocomplete="off" value="<?php echo $type['id_type']; ?>">
-                                        <label class="btn btn-outline-primary" for="type"><?php echo $type['name_type']; ?></label>
-
-                                        <?php if ($_POST['type'] == $type['name_type']) {?>
-                                            <input type="checkbox" class="btn-check" id="type" name="types[]" checked value="<?php echo $type['id_type']; ?>">
-                                            <label class="btn btn-outline-primary" for="type"><?php echo $type['name_type']; ?></label>
+                                        <?php 
+                                        // Comprobar si el string tiene comas
+                                        //AQUÍ ESTÁ EL PROBLEMA, ESTE BUCLE DEBE IR FUERA, O SINO SIMEPRE SE EJECUTA EL ARRAYtYPES Y NO PASA MÁS ALLÁ DEL arrayTypes[0] :)
+                                        if (str_contains($_POST['type'], ',')) {
+                                            // Realizar el explode solo si hay comas
+                                            $arrayTypes = explode(",", $_POST['type']);
+                                            foreach ($arrayTypes as $type1)
+                                            { 
+                                                if ($type1 == $type['name_type']) {?>
+                                                <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" checked value="<?php echo $type['id_type']; ?>">
+                                                <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>                                            
+                                        <?php
+                                                //Este array es para que no se me dupliquen los checkbox selecionados
+                                                $checkedTypes[] = $type['id_type'];
+                                                }
+                                            }
+                                        } else if ($_POST['type'] == $type['name_type']) {?>
+                                            <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" checked value="<?php echo $type['id_type']; ?>">
+                                            <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>
+                                        <?php
+                                            //continuo guardando los id_type para luego no se repitan
+                                            $checkedTypes[] = $type['id_type'];
+                                        } 
+                                        
+                                        if (empty($checkedTypes))
+                                        { ?>
+                                            <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" autocomplete="off" value="<?php echo $type['id_type']; ?>">
+                                            <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>
+                                        <?php } ?>
+                                        <!-- si en mi array chekedTypes no está el algún id_type, me hace el checkbox -->
+                                        <?php
+                                        foreach ($checkedTypes as $checked)
+                                        {
+                                            if ($checked !== $type['id_type']) {?>
+                                                <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" autocomplete="off" value="<?php echo $type['id_type']; ?>">
+                                                <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>
+                                            <?php } ?>
                                         <?php } ?>
                                     <?php } ?>
                                 </div>

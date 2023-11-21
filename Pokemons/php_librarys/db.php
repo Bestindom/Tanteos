@@ -49,7 +49,7 @@ function openDb() {
 
     $servername = "localhost";
     $username = "root";
-    $password = "mysql";
+    $password = "root";
 
     $connection = new PDO("mysql:host=$servername;dbname=pokemons", $username, $password);
     // set the PDO error mode to exception

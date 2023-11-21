@@ -2,6 +2,8 @@
     require_once('./php_librarys/db.php');
 
     $regions = selectRegions();
+
+    $types = selectTypes();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,59 +83,10 @@
                         <div class="col-sm-10">
                             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                                 <div>
-                                    <input type="checkbox" class="btn-check" id="Normal" name="types[]" autocomplete="off" value="1">
-                                    <label class="btn btn-outline-primary" for="Normal">Normal</label>
-
-                                    <input type="checkbox" class="btn-check" id="Fire" name="types[]" autocomplete="off" value="2">
-                                    <label class="btn btn-outline-primary" for="Fire">Fire</label>
-
-                                    <input type="checkbox" class="btn-check" id="Water" name="types[]" autocomplete="off" value="3">
-                                    <label class="btn btn-outline-primary" for="Water">Water</label>
-
-                                    <input type="checkbox" class="btn-check" id="Grass" name="types[]" autocomplete="off" value="4">
-                                    <label class="btn btn-outline-primary" for="Grass">Grass</label>
-
-                                    <input type="checkbox" class="btn-check" id="Electric" name="types[]" autocomplete="off" value="5">
-                                    <label class="btn btn-outline-primary" for="Electric">Electric</label>
-
-                                    <input type="checkbox" class="btn-check" id="Ice" name="types[]" autocomplete="off" value="6">
-                                    <label class="btn btn-outline-primary" for="Ice">Ice</label>
-
-                                    <input type="checkbox" class="btn-check" id="Fighting" name="types[]" autocomplete="off" value="7">
-                                    <label class="btn btn-outline-primary" for="Fighting">Fighting</label>
-
-                                    <input type="checkbox" class="btn-check" id="Poison" name="types[]" autocomplete="off" value="8">
-                                    <label class="btn btn-outline-primary" for="Poison">Poison</label>
-
-                                    <input type="checkbox" class="btn-check" id="Ground" name="types[]" autocomplete="off" value="9">
-                                    <label class="btn btn-outline-primary" for="Ground">Ground</label>
-
-                                    <input type="checkbox" class="btn-check" id="Flying" name="types[]" autocomplete="off" value="10">
-                                    <label class="btn btn-outline-primary" for="Flying">Flying</label>
-
-                                    <input type="checkbox" class="btn-check" id="Psychic" name="types[]" autocomplete="off" value="11">
-                                    <label class="btn btn-outline-primary" for="Psychic">Psychic</label>
-
-                                    <input type="checkbox" class="btn-check" id="Bug" name="types[]" autocomplete="off" value="12">
-                                    <label class="btn btn-outline-primary" for="Bug">Bug</label>
-
-                                    <input type="checkbox" class="btn-check" id="Rock" name="types[]" autocomplete="off" value="13">
-                                    <label class="btn btn-outline-primary" for="Rock">Rock</label>
-
-                                    <input type="checkbox" class="btn-check" id="Ghost" name="types[]" autocomplete="off" value="14">
-                                    <label class="btn btn-outline-primary" for="Ghost">Ghost</label>
-
-                                    <input type="checkbox" class="btn-check" id="Dragon" name="types[]" autocomplete="off" value="15">
-                                    <label class="btn btn-outline-primary" for="Dragon">Dragon</label>
-
-                                    <input type="checkbox" class="btn-check" id="Dark" name="types[]" autocomplete="off" value="16">
-                                    <label class="btn btn-outline-primary" for="Dark">Dark</label>
-
-                                    <input type="checkbox" class="btn-check" id="Steel" name="types[]" autocomplete="off" value="17">
-                                    <label class="btn btn-outline-primary" for="Steel">Steel</label>
-
-                                    <input type="checkbox" class="btn-check" id="Fairy" name="types[]" autocomplete="off" value="18">
-                                    <label class="btn btn-outline-primary" for="Fairy">Fairy</label>
+                                    <?php foreach ($types as $type) { ?>
+                                            <input type="checkbox" class="btn-check" id="<?php echo $type['id_type']; ?>" name="types[]" autocomplete="off" value="<?php echo $type['id_type']; ?>">
+                                            <label class="btn btn-outline-primary" for="<?php echo $type['id_type']; ?>"><?php echo $type['name_type']; ?></label>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
